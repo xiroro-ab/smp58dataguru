@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMPN 58 PLG - Sistem Manajemen Sekolah
-    <p>Create By Aris Bermansyah, S.Kom</p></title>
+    <title>SMPN 58 PLG - Sistem Manajemen Sekolah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -161,7 +160,7 @@
         </header>
 
         <!-- Sidebar -->
-        <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-gray-800 bg-opacity-95 backdrop-blur-md shadow-xl z-50 sidebar-transition transform -translate-x-full lg:translate-x-0">
+        <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-gray-800 bg-opacity-95 backdrop-blur-md shadow-xl z-50 sidebar-transition transform -translate-x-full">
             <!-- Sidebar Header with Close Button -->
             <div class="p-6 border-b border-gray-700 border-opacity-50">
                 <div class="flex items-center justify-between">
@@ -172,8 +171,8 @@
                             <p class="text-sm text-gray-400">Admin Panel</p>
                         </div>
                     </div>
-                    <!-- Close button for mobile/tablet -->
-                    <button id="sidebarClose" class="lg:hidden text-gray-400 hover:text-white transition-colors duration-200 p-2">
+                    <!-- Close button for all devices -->
+                    <button id="sidebarClose" class="text-gray-400 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-gray-700">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
@@ -212,12 +211,13 @@
         </aside>
 
         <!-- Main Content -->
-        <main id="mainContent" class="lg:ml-64 min-h-screen bg-gray-900">
+        <main id="mainContent" class="min-h-screen bg-gray-900">
             <!-- Beranda -->
             <div id="berandaPage" class="page-content p-6">
                 <div class="mb-8">
                     <h2 class="text-3xl font-bold text-white mb-2">Selamat Datang</h2>
                     <p class="text-gray-400">Sistem Manajemen Sekolah SMPN 58 Palembang</p>
+                    <p class="text-gray-250">Create By Aris Bermansyah S.Kom</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -743,7 +743,7 @@
     </div>
 
     <!-- Sidebar Overlay -->
-    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
 
     <script>
         // Configuration - Replace with your Google Apps Script Web App URL
@@ -1061,10 +1061,8 @@
                 item.classList.add('text-gray-300');
             });
             
-            // Close sidebar on mobile
-            if (window.innerWidth < 1024) {
-                closeSidebar();
-            }
+            // Close sidebar after navigation on all devices
+            closeSidebar();
         }
 
         // Sidebar functionality
@@ -1073,7 +1071,6 @@
 
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
             
             if (sidebar.classList.contains('-translate-x-full')) {
                 openSidebar();
@@ -1087,18 +1084,16 @@
             const overlay = document.getElementById('sidebarOverlay');
             
             sidebar.classList.remove('-translate-x-full');
-            if (window.innerWidth < 1024) {
-                overlay.classList.remove('hidden');
-            }
+            // Show overlay on all screen sizes when sidebar is open
+            overlay.classList.remove('hidden');
         }
 
         function closeSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
             
-            if (window.innerWidth < 1024) {
-                sidebar.classList.add('-translate-x-full');
-            }
+            // Hide sidebar on all screen sizes
+            sidebar.classList.add('-translate-x-full');
             overlay.classList.add('hidden');
         }
 
@@ -2340,21 +2335,11 @@
             document.getElementById('sidebarClose').addEventListener('click', closeSidebar);
         });
 
-        // Responsive sidebar handling
+        // Responsive sidebar handling - simplified
         window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            if (window.innerWidth >= 1024) {
-                // Desktop: show sidebar, hide overlay
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.add('hidden');
-            } else {
-                // Mobile/Tablet: hide sidebar and overlay by default
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
+            // Sidebar behavior is now consistent across all devices
+            // Always starts hidden and can be toggled with hamburger button
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'974bfce0f6cee8df',t:'MTc1NjEzNDMyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'974c1a31577a9a2b',t:'MTc1NjEzNTUyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
