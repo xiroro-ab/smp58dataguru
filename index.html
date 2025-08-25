@@ -1187,8 +1187,11 @@
             let filteredData = [...currentSiswaData]; // Create a copy
             if (filterKelas && filterKelas.trim() !== '') {
                 filteredData = currentSiswaData.filter(siswa => {
-                    console.log(`Comparing: ${siswa.kelas} === ${filterKelas}`);
-                    return siswa.kelas === filterKelas;
+                    // Convert both values to strings and trim whitespace for comparison
+                    const siswaKelas = String(siswa.kelas || '').trim();
+                    const targetKelas = String(filterKelas).trim();
+                    console.log(`Comparing: "${siswaKelas}" === "${targetKelas}"`);
+                    return siswaKelas === targetKelas;
                 });
                 console.log('Filtered data:', filteredData);
             }
@@ -1741,5 +1744,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'974b2c3340e24e67',t:'MTc1NjEyNTc4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'974b32f37787f4e4',t:'MTc1NjEyNjA1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
