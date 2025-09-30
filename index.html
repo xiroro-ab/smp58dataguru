@@ -1405,19 +1405,30 @@ function formatTanggal(isoString) {
 }
 
 // Letakkan fungsi baru ini di bawah fungsi formatTanggal
-function formatWaktu(isoString) {
-    if (!isoString) return ''; // Mengembalikan string kosong jika data tidak ada
+// GANTI FUNGSI LAMA ANDA DENGAN YANG BARU INI
 
-    // Buat objek Date dari string ISO
-    const tanggalObj = new Date(isoString);
+function formatWaktu(waktuString) {
+    if (!waktuString) return ''; // Jika data kosong, kembalikan string kosong
 
-    // Ambil komponen jam dan menit
-    const jam = String(tanggalObj.getHours()).padStart(2, '0');
-    const menit = String(tanggalObj.getMinutes()).padStart(2, '0');
+    // Cek apakah string mengandung 'T'. Ini menandakan format ISO lengkap dari Google Sheets.
+    if (waktuString.includes('T')) {
+        const tanggalObj = new Date(waktuString);
+        
+        // Pastikan hasil konversi adalah tanggal yang valid
+        if (isNaN(tanggalObj)) {
+            return 'Waktu Invalid';
+        }
 
-    // Gabungkan menjadi format "JJ:MM"
-    return `${jam}:${menit}`;
-}        
+        const jam = String(tanggalObj.getHours()).padStart(2, '0');
+        const menit = String(tanggalObj.getMinutes()).padStart(2, '0');
+
+        return `${jam}:${menit}`;
+    }
+
+    // Jika tidak ada 'T', kita anggap formatnya sudah "HH:mm" atau "HH:mm:ss" dari form input.
+    // Kita cukup ambil 5 karakter pertama ("HH:mm").
+    return waktuString.slice(0, 5);
+}      
 
 // GANTI FUNGSI LAMA ANDA DENGAN INI JUGA
 function displayAgendaList() {
@@ -1892,7 +1903,7 @@ function loadMapelFromStorage() {
         mataPelajaranList = JSON.parse(storedMapel);
     } else {
         // Daftar default jika belum ada data
-        mataPelajaranList = ['Informatika', 'Matematika', 'Bahasa Indonesia'];
+        mataPelajaranList = ['Informatika', 'Matematika', 'Bahasa Indonesia', 'Bahasa Inggris', 'Bahasa Palembang', 'IPA', 'IPS', 'PAI', 'PKN', 'S.Budaya', 'PJOK', 'KKA'];
         saveMapelToStorage();
     }
 }
