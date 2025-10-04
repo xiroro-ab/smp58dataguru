@@ -3566,26 +3566,46 @@ function groupPenilaianData(data) {
 }
 
         // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set today's date as default
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('tanggalAbsen').value = today;
-            document.getElementById('tanggalRekapAbsensi').value = today;
-            
-            // Set current date and time for agenda and jurnal
-            document.getElementById('agendaTanggal').value = today;
-            document.getElementById('jurnalTanggal').value = today;
-            
-            // Add close button event listener
-            document.getElementById('sidebarClose').addEventListener('click', closeSidebar);
+// GANTI BLOK LAMA DENGAN VERSI FINAL INI
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM Content Loaded: Memulai pengaturan awal...");
 
-                // ===============================================
-                //       TAMBAHKAN DUA BARIS BARU INI
-                // ===============================================
-                loadMapelFromStorage();
-                populateAllMapelSelects();
-                // ===============================================
+    try {
+        // =======================================================
+        // ==                 PERBAIKAN DI SINI                 ==
+        // =======================================================
+        // Ambil komponen tanggal LOKAL, bukan UTC
+        const localDate = new Date();
+        const year = localDate.getFullYear();
+        const month = String(localDate.getMonth() + 1).padStart(2, '0'); // +1 karena bulan dimulai dari 0
+        const day = String(localDate.getDate()).padStart(2, '0');
+        const today = `${year}-${month}-${day}`;
+        // =======================================================
+
+        console.log("Tanggal hari ini (LOKAL):", today); // Log ini akan menunjukkan tanggal 5
+
+        const dateInputs = [
+            'agendaTanggal', 'jurnalTanggal', 'tanggalAbsen', 
+            'tanggalRekapAbsensi', 'mgmpTanggal', 'notulenTanggal'
+        ];
+
+        dateInputs.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.value = today;
+            }
         });
+
+        // Kode inisialisasi lain
+        loadMapelFromStorage();
+        populateAllMapelSelects();
+        document.getElementById('sidebarClose').addEventListener('click', closeSidebar);
+        console.log("Pengaturan awal selesai.");
+
+    } catch (error) {
+        console.error("💥 ERROR di dalam DOMContentLoaded:", error);
+    }
+});
 
         // Responsive sidebar handling - simplified
         window.addEventListener('resize', function() {
