@@ -396,12 +396,52 @@ select.neon-input:focus {
                 <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
                     <i class="fas fa-sign-in-alt mr-2"></i>Masuk
                 </button>
+                <p class="text-center text-sm text-glow mt-6">
+                    Belum punya akun? 
+                    <a href="#" onclick="showRegisterPage()" class="font-semibold text-cyan-400 hover:text-cyan-300">
+                    Daftar di sini
+                </a>
+                </p>
             </form>
     <p class="text-center text-xs text-glow mt-8">
         © 2025 Aris Bermansyah, S.Kom
     </p>
         </div>
     </div>
+
+
+<!---- REGISTER PAGE ---->
+<div id="registerPage" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 hidden">
+    <div class="neon-canvas p-6 w-full max-w-md"> 
+        <div class="text-center mb-6"> <i class="fas fa-user-plus text-4xl mb-4 text-glow"></i> <h1 class="text-2xl font-bold text-white mb-2">Pendaftaran Akun Guru</h1> </div>
+        <form id="registerForm" class="space-y-3">
+            <div>
+                <label class="block text-sm font-medium text-glow mb-1">Username</label>
+                <input type="text" id="regUsername" class="w-full neon-input p-3" placeholder="Username untuk login" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-glow mb-1">Password</label>
+                <input type="password" id="regPassword" class="w-full neon-input p-3" placeholder="Password" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-glow mb-1">Nama Lengkap & Gelar</label>
+                <input type="text" id="regNamaLengkap" class="w-full neon-input p-3" placeholder="Contoh: Aris Bermansyah, S.Kom" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-glow mb-1">NIP / NIPPPK (jika ada)</label>
+                <input type="text" id="regNip" class="w-full neon-input p-3" placeholder="Contoh: NIP. 19961114202211....">
+            </div>
+            <button type="submit" class="w-full btn-primary py-3 rounded-lg font-semibold !mt-6"> <span class="btn-text">Kirim Permintaan Pendaftaran</span>
+                <span class="btn-loading hidden">...</span>
+            </button>
+        </form>
+        <p class="text-center text-sm text-glow mt-4"> Sudah punya akun? 
+            <a href="#" onclick="showLoginPage()" class="font-semibold text-cyan-400 hover:text-cyan-300">
+                Kembali ke Login
+            </a>
+        </p>
+    </div>
+</div>
 
     <!-- Main App -->
     <div id="mainApp" class="hidden">
@@ -4630,6 +4670,47 @@ document.getElementById('editNotulenForm').addEventListener('submit', async func
             displayNotulenList();
         }
         showNotification('Notulen berhasil diperbarui!', 'success');
+    }
+});
+
+// Fungsi untuk navigasi
+function showRegisterPage() {
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('registerPage').classList.remove('hidden');
+}
+function showLoginPage() {
+    document.getElementById('registerPage').classList.add('hidden');
+    document.getElementById('loginPage').classList.remove('hidden');
+}
+
+// Event listener untuk form registrasi
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitButton = this.querySelector('button[type="submit"]');
+    setButtonLoading(submitButton, true);
+
+    const registerData = {
+        username: document.getElementById('regUsername').value,
+        password: document.getElementById('regPassword').value,
+        namaLengkap: document.getElementById('regNamaLengkap').value,
+        nip: document.getElementById('regNip').value
+    };
+
+    if (!registerData.username || !registerData.password || !registerData.namaLengkap) {
+        showNotification('Username, Password, dan Nama Lengkap wajib diisi!', 'error');
+        setButtonLoading(submitButton, false);
+        return;
+    }
+
+    try {
+        const result = await callAppsScript('requestRegistration', registerData);
+        if (result.success) {
+            showNotification(result.message, 'success');
+            showLoginPage();
+            this.reset();
+        }
+    } finally {
+        setButtonLoading(submitButton, false);
     }
 });
 
