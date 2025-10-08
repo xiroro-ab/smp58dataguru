@@ -7,7 +7,6 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>SMPN 58 PLG - Sistem Manajemen Sekolah</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/xiroro-ab/smp58dataguru/refs/heads/main/ico.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -52,6 +51,11 @@ body {
     0 0 5px #ff0000,
     0 0 10px #ff0000,
     0 0 15px #ff4444;
+}
+
+/* agar teks li bisakebawah */
+.word-break-li {
+  overflow-wrap: break-word;
 }
 
 /* Styling untuk Container/Canvas Transparan */
@@ -501,10 +505,9 @@ select.neon-input:focus {
         <div class="text-gray-300 text-left space-y-3 text-sm">
             <p>Kami telah mengirimkan password sementara ke alamat email yang terdaftar untuk akun Anda.</p>
             <ul class="list-disc list-inside bg-gray-900/50 p-4 rounded-lg">
-                <li>Buka aplikasi email Anda.</li>
-                <li>Jika email tidak ada di kotak masuk utama, <span class="text-glow-red">(periksa pada folder SPAM).</span></li>
-                <li>Lalu silahkan cari email dari pengirim: <strong id="adminEmailDisplay" class="text-glow"></strong>
-                </li>
+            <li>Buka aplikasi email Anda.</li>
+            <li>Jika email tidak ada di kotak masuk utama, <span class="text-glow-red">(periksa pada folder SPAM).</span></li>
+            <li class="word-break-li">Cari email dari pengirim: <strong id="adminEmailDisplay" class="text-glow"></strong></li>
             </ul>
             <p>Gunakan password sementara tersebut untuk login dan segera ganti password defaultnya pada menu profile.</p>
         </div>
